@@ -76,10 +76,10 @@
                     <h2>Fila de Pedidos</h2>
                     
                     <div class="filtros">
-    <button class="filtro-btn ativo" onclick="filtrarPedidos('todos')">📋 TODOS</button>
-    <button class="filtro-btn" onclick="filtrarPedidos('pendentes')">⏳ PENDENTES</button>
-    <button class="filtro-btn" onclick="filtrarPedidos('concluidos')">✅ CONCLUÍDOS</button>
-</div>
+                        <button class="filtro-btn ativo" onclick="filtrarPedidos('todos')">📋 TODOS</button>
+                        <button class="filtro-btn" onclick="filtrarPedidos('pendentes')">⏳ PENDENTES</button>
+                        <button class="filtro-btn" onclick="filtrarPedidos('concluidos')">✅ CONCLUÍDOS</button>
+                    </div>
 
                     <div id="listaPedidos" class="lista-pedidos">
                         <!-- Pedidos serão inseridos aqui dinamicamente -->
@@ -135,49 +135,49 @@
             </div>
 
             <!-- ABA RELATÓRIOS -->
-<div id="abaRelatorios" class="aba-conteudo">
-    <div class="relatorio-actions">
-        <button class="btn-principal" onclick="novaNoite()" style="background: linear-gradient(135deg, #27AE60, #229954);">
-            🆕 NOVA NOITE
-        </button>
-        <button class="btn-secundario" onclick="encerrarNoite()">🔚 Encerrar Noite</button>
-        <button class="btn-secundario" onclick="carregarRelatorioNoite()">🔄 Atualizar</button>
-    </div>
-    
-    <!-- Botão de reset com estilo diferente -->
-    <div style="text-align: right; margin-bottom: 20px;">
-        <button class="btn-excluir" onclick="resetarSistema()" style="width: auto; padding: 10px 20px;">
-            ⚠️ RESETAR SISTEMA
-        </button>
-    </div>
+            <div id="abaRelatorios" class="aba-conteudo">
+                <div class="relatorio-actions">
+                    <button class="btn-principal" onclick="novaNoite()" style="background: linear-gradient(135deg, #27AE60, #229954);">
+                        🆕 NOVA NOITE
+                    </button>
+                    <button class="btn-secundario" onclick="encerrarNoite()">🔚 Encerrar Noite</button>
+                    <button class="btn-secundario" onclick="carregarRelatorioNoite()">🔄 Atualizar</button>
+                </div>
+                
+                <!-- Botão de reset com estilo diferente -->
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <button class="btn-excluir" onclick="resetarSistema()" style="width: auto; padding: 10px 20px;">
+                        ⚠️ RESETAR SISTEMA
+                    </button>
+                </div>
 
-    <div class="relatorio-section">
-        <h2>Totais da Noite</h2>
-        <div id="totaisNoite" class="cards-container">
-            <!-- Cards com totais -->
-        </div>
-    </div>
+                <div class="relatorio-section">
+                    <h2>Totais da Noite</h2>
+                    <div id="totaisNoite" class="cards-container">
+                        <!-- Cards com totais -->
+                    </div>
+                </div>
 
-    <div class="relatorio-section">
-        <h2>⏱️ Tempo Médio: <span id="tempoMedio">0</span> min</h2>
-        <canvas id="graficoPedidos"></canvas>
-    </div>
+                <div class="relatorio-section">
+                    <h2>⏱️ Tempo Médio: <span id="tempoMedio">0</span> min</h2>
+                    <canvas id="graficoPedidos"></canvas>
+                </div>
 
-    <div class="relatorio-section">
-        <h2>🏆 Top 5 Sabores</h2>
-        <div id="topSabores" class="ranking-lista"></div>
-    </div>
+                <div class="relatorio-section">
+                    <h2>🏆 Top 5 Sabores</h2>
+                    <div id="topSabores" class="ranking-lista"></div>
+                </div>
 
-    <div class="relatorio-section">
-        <h2>📊 Ranking de Garçons</h2>
-        <div id="rankingGarcons" class="ranking-lista"></div>
-    </div>
+                <div class="relatorio-section">
+                    <h2>📊 Ranking de Garçons</h2>
+                    <div id="rankingGarcons" class="ranking-lista"></div>
+                </div>
 
-    <div class="relatorio-section">
-        <h2>📈 Estatísticas Gerais</h2>
-        <div id="estatisticasGerais" class="cards-container"></div>
-    </div>
-</div>
+                <div class="relatorio-section">
+                    <h2>📈 Estatísticas Gerais</h2>
+                    <div id="estatisticasGerais" class="cards-container"></div>
+                </div>
+            </div>
 
             <!-- ABA BACKUP -->
             <div id="abaBackup" class="aba-conteudo">
