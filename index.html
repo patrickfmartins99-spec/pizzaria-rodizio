@@ -25,40 +25,44 @@
         <!-- ABA PEDIDOS -->
         <div id="abaPedidos" class="aba-conteudo ativa">
             <div class="painel-pedido">
-                <h2>Novo Pedido</h2>
-                <form id="formPedido" onsubmit="event.preventDefault(); criarPedido();">
-                    <div class="form-grupo">
-                        <label>Tipo:</label>
-                        <select id="tipoSabor" onchange="carregarSaboresPorTipo()" required>
-                            <option value="">Selecione</option>
-                            <option value="doce">Doce</option>
-                            <option value="salgada">Salgada</option>
-                        </select>
-                    </div>
-
-                    <div class="form-grupo">
-                        <label>Sabor:</label>
-                        <select id="saborPedido" required>
-                            <option value="">Selecione um sabor</option>
-                        </select>
-                    </div>
-
-                    <div class="form-grupo">
-                        <label>Garçom:</label>
-                        <select id="garcomPedido" required>
-                            <option value="">Selecione</option>
-                        </select>
-                    </div>
-
-                    <div class="form-grupo">
-                        <label>Mesa:</label>
-                        <input type="number" id="mesaPedido" min="1" value="1" required>
-                    </div>
-
-                    <button type="submit" class="btn-principal">Confirmar Pedido</button>
-                </form>
+    <h2>Novo Pedido</h2>
+    <form id="formPedido" onsubmit="event.preventDefault(); criarPedido();">
+        <div class="form-row">
+            <div class="form-col">
+                <label>Tipo:</label>
+                <select id="tipoSabor" onchange="carregarSaboresPorTipo()" required>
+                    <option value="">Selecione</option>
+                    <option value="doce">Doce</option>
+                    <option value="salgada">Salgada</option>
+                </select>
             </div>
 
+            <div class="form-col">
+                <label>Sabor:</label>
+                <select id="saborPedido" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="form-col">
+                <label>Garçom:</label>
+                <select id="garcomPedido" required>
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+
+            <div class="form-col">
+                <label>Mesa:</label>
+                <input type="number" id="mesaPedido" min="1" value="1" required>
+            </div>
+        </div>
+        
+        <div class="form-actions">
+            <button type="submit" class="btn-principal">✓ Confirmar Pedido</button>
+        </div>
+    </form>
+</div>
+            
             <div class="fila-pedidos">
                 <h2>Fila de Pedidos</h2>
                 
