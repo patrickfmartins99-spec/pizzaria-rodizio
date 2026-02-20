@@ -1,29 +1,29 @@
 /* ============================================
-   SISTEMA DE PIZZARIA RODÍZIO - VERSÃO TABLET
-   Design Profissional com Header Fixo e Formulário Horizontal
+   SISTEMA DE PIZZARIA RODÍZIO - VERSÃO PROFISSIONAL
+   Design Limpo, Organizado e Totalmente Responsivo
    ============================================ */
 
 /* Importação de fontes */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* Variáveis de cores - Paleta Elegante */
+/* Variáveis de cores */
 :root {
-    --primary: #2C3E50;        /* Azul petróleo - sofisticado */
-    --primary-dark: #1A252F;    /* Azul petróleo escuro */
-    --secondary: #E67E22;       /* Laranja queimado - ação, pizzaria */
-    --secondary-dark: #D35400;   /* Laranja escuro */
-    --success: #27AE60;         /* Verde - sucesso, liberado */
-    --danger: #C0392B;          /* Vermelho suave - excluir */
-    --warning: #F39C12;          /* Amarelo - atenção */
-    --background: #ECF0F1;       /* Cinza claro - fundo */
-    --surface: #FFFFFF;          /* Branco - cards */
-    --text: #34495E;            /* Azul escuro - texto principal */
-    --text-light: #7F8C8D;      /* Cinza - texto secundário */
-    --border: #BDC3C7;          /* Cinza - bordas */
-    --shadow: rgba(0, 0, 0, 0.1); /* Sombra suave */
+    --primary: #2C3E50;
+    --primary-dark: #1A252F;
+    --secondary: #E67E22;
+    --secondary-dark: #D35400;
+    --success: #27AE60;
+    --danger: #C0392B;
+    --warning: #F39C12;
+    --background: #ECF0F1;
+    --surface: #FFFFFF;
+    --text: #34495E;
+    --text-light: #7F8C8D;
+    --border: #BDC3C7;
+    --shadow: rgba(0, 0, 0, 0.1);
 }
 
-/* Reset e Estilos Globais */
+/* Reset e estilos globais */
 * {
     margin: 0;
     padding: 0;
@@ -31,14 +31,14 @@
 }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: var(--background);
     color: var(--text);
-    line-height: 1.5;
+    line-height: 1.6;
     min-height: 100vh;
 }
 
-/* Container Principal */
+/* Container principal */
 .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -59,12 +59,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .logo-area {
@@ -75,7 +73,6 @@ body {
 
 .logo-icon {
     font-size: 2rem;
-    line-height: 1;
 }
 
 .logo-text h1 {
@@ -87,7 +84,6 @@ body {
 .logo-text p {
     font-size: 0.8rem;
     opacity: 0.9;
-    font-weight: 400;
 }
 
 .data-header {
@@ -108,7 +104,6 @@ body {
     border-bottom: 2px solid var(--border);
     display: flex;
     gap: 8px;
-    flex-wrap: wrap;
     position: sticky;
     top: 80px;
     z-index: 999;
@@ -117,17 +112,15 @@ body {
 
 .aba-btn {
     flex: 1;
-    min-width: 120px;
     padding: 16px 12px;
-    background-color: transparent;
+    background: transparent;
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
     font-weight: 600;
     color: var(--text-light);
     cursor: pointer;
-    transition: all 0.3s ease;
-    touch-action: manipulation;
+    transition: all 0.3s;
     position: relative;
 }
 
@@ -140,7 +133,7 @@ body {
     width: 0;
     height: 3px;
     background-color: var(--secondary);
-    transition: width 0.3s ease;
+    transition: width 0.3s;
 }
 
 .aba-btn:hover {
@@ -167,7 +160,7 @@ body {
 
 .aba-conteudo {
     display: none;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.3s;
 }
 
 .aba-conteudo.ativa {
@@ -183,7 +176,7 @@ body {
    FORMULÁRIO DE PEDIDOS - HORIZONTAL
    ============================================ */
 .painel-pedido {
-    background: linear-gradient(135deg, var(--surface) 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, var(--surface), #f8f9fa);
     border-radius: 20px;
     padding: 24px;
     margin-bottom: 30px;
@@ -193,7 +186,7 @@ body {
 
 .painel-pedido h2 {
     color: var(--primary);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     margin-bottom: 20px;
     font-weight: 700;
     border-left: 6px solid var(--secondary);
@@ -207,92 +200,59 @@ body {
     flex-wrap: wrap;
 }
 
-.form-col {
+.form-group {
     flex: 1;
     min-width: 180px;
 }
 
-.form-col label {
+.form-group label {
     display: block;
     margin-bottom: 8px;
     font-weight: 600;
     color: var(--primary);
-    font-size: 0.95rem;
-    text-transform: uppercase;
+    font-size: 0.85rem;
     letter-spacing: 0.5px;
 }
 
-.form-col select,
-.form-col input {
+.form-group select,
+.form-group input {
     width: 100%;
-    padding: 16px 14px;
+    padding: 14px 12px;
     border: 2px solid var(--border);
-    border-radius: 14px;
+    border-radius: 12px;
     font-size: 1rem;
     transition: all 0.3s;
     background-color: var(--surface);
-    cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232C3E50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    background-size: 20px;
 }
 
-.form-col input {
-    background-image: none;
-}
-
-.form-col select:hover,
-.form-col input:hover {
-    border-color: var(--secondary);
-}
-
-.form-col select:focus,
-.form-col input:focus {
+.form-group select:focus,
+.form-group input:focus {
     outline: none;
     border-color: var(--secondary);
-    box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.2);
+    box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.1);
 }
 
-.form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-}
-
-.btn-principal {
-    min-width: 300px;
-    max-width: 500px;
-    padding: 20px 40px;
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+.btn-confirmar {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: block;
+    padding: 18px 40px;
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
     color: white;
     border: none;
     border-radius: 50px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
-    touch-action: manipulation;
     box-shadow: 0 8px 20px rgba(230, 126, 34, 0.3);
-    text-transform: uppercase;
     letter-spacing: 1px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
 }
 
-.btn-principal:hover {
-    background: linear-gradient(135deg, var(--secondary-dark) 0%, var(--secondary) 100%);
+.btn-confirmar:hover {
     transform: translateY(-2px);
     box-shadow: 0 12px 25px rgba(230, 126, 34, 0.4);
-}
-
-.btn-principal:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
 }
 
 /* ============================================
@@ -307,7 +267,7 @@ body {
 
 .fila-pedidos h2 {
     color: var(--primary);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: 20px;
 }
 
@@ -321,7 +281,7 @@ body {
 .filtro-btn {
     flex: 1;
     min-width: 100px;
-    padding: 14px 20px;
+    padding: 12px 20px;
     background-color: var(--background);
     border: 2px solid var(--border);
     border-radius: 12px;
@@ -330,7 +290,6 @@ body {
     color: var(--text);
     cursor: pointer;
     transition: all 0.3s;
-    touch-action: manipulation;
 }
 
 .filtro-btn.ativo {
@@ -345,7 +304,7 @@ body {
     color: white;
 }
 
-/* Cards de Pedido */
+/* Cards de pedido */
 .lista-pedidos {
     display: flex;
     flex-direction: column;
@@ -355,9 +314,8 @@ body {
 .pedido-card {
     background-color: var(--surface);
     border: 2px solid var(--border);
-    border-radius: 18px;
+    border-radius: 16px;
     padding: 20px;
-    transition: all 0.3s;
     position: relative;
     overflow: hidden;
 }
@@ -379,7 +337,6 @@ body {
 .pedido-card.concluido {
     background-color: #f0f9f0;
     border-color: var(--success);
-    opacity: 0.9;
 }
 
 .pedido-header {
@@ -392,12 +349,11 @@ body {
 }
 
 .pedido-tipo {
-    padding: 8px 16px;
-    border-radius: 30px;
-    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .tipo-doce {
@@ -413,13 +369,12 @@ body {
 }
 
 .pedido-timer {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 800;
-    color: var(--secondary);
     font-family: monospace;
     background-color: var(--background);
-    padding: 8px 16px;
-    border-radius: 40px;
+    padding: 6px 12px;
+    border-radius: 30px;
     border: 2px solid var(--border);
 }
 
@@ -429,28 +384,24 @@ body {
 }
 
 .pedido-info p {
-    margin: 8px 0;
+    margin: 5px 0;
 }
 
 .pedido-info strong {
     color: var(--primary);
-    font-size: 1.2rem;
 }
 
 .btn-liberar {
     width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, var(--success) 0%, #229954 100%);
+    padding: 14px;
+    background: linear-gradient(135deg, var(--success), #229954);
     color: white;
     border: none;
     border-radius: 12px;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
-    touch-action: manipulation;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .btn-liberar:hover {
@@ -471,13 +422,31 @@ body {
 
 .config-section h2 {
     color: var(--primary);
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     margin-bottom: 20px;
     border-bottom: 3px solid var(--secondary);
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     display: inline-block;
 }
 
+.btn-adicionar {
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-adicionar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.3);
+}
+
+/* Lista de itens */
 .lista-itens {
     margin-top: 24px;
 }
@@ -489,37 +458,29 @@ body {
     padding: 16px 20px;
     background-color: var(--background);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    margin-bottom: 10px;
-    transition: all 0.3s;
-}
-
-.item-lista:hover {
-    border-color: var(--secondary);
-    box-shadow: 0 4px 12px var(--shadow);
+    border-radius: 12px;
+    margin-bottom: 8px;
 }
 
 .item-info {
     flex: 1;
     font-size: 1.1rem;
     font-weight: 500;
-    color: var(--text);
 }
 
 .item-acoes {
     display: flex;
-    gap: 10px;
+    gap: 8px;
 }
 
 .item-acoes button {
-    padding: 10px 24px;
+    padding: 8px 16px;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
-    touch-action: manipulation;
 }
 
 .btn-editar {
@@ -540,154 +501,7 @@ body {
     background-color: #a8231f;
 }
 
-/* ============================================
-   RELATÓRIOS E CARDS
-   ============================================ */
-.relatorio-actions {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.btn-secundario {
-    flex: 1;
-    min-width: 200px;
-    padding: 16px 24px;
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    touch-action: manipulation;
-}
-
-.btn-secundario:hover {
-    background-color: var(--primary-dark);
-}
-
-.cards-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin: 20px 0 30px;
-}
-
-.card-total {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: white;
-    padding: 24px;
-    border-radius: 18px;
-    text-align: center;
-    box-shadow: 0 8px 20px rgba(44, 62, 80, 0.3);
-}
-
-.card-total h3 {
-    font-size: 1.2rem;
-    margin-bottom: 12px;
-    opacity: 0.9;
-    font-weight: 500;
-}
-
-.card-total .valor {
-    font-size: 2.8rem;
-    font-weight: 800;
-    line-height: 1;
-}
-
-.ranking-lista {
-    margin: 20px 0 30px;
-}
-
-.ranking-item {
-    display: flex;
-    align-items: center;
-    padding: 16px 20px;
-    background: linear-gradient(135deg, var(--surface) 0%, var(--background) 100%);
-    border-radius: 14px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border);
-    transition: all 0.3s;
-}
-
-.ranking-item:hover {
-    border-color: var(--secondary);
-    transform: translateX(5px);
-}
-
-.ranking-posicao {
-    width: 45px;
-    height: 45px;
-    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1.3rem;
-    margin-right: 20px;
-    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
-}
-
-.ranking-nome {
-    flex: 1;
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: var(--text);
-}
-
-.ranking-valor {
-    font-weight: 800;
-    color: var(--secondary);
-    font-size: 1.3rem;
-    background-color: var(--background);
-    padding: 6px 16px;
-    border-radius: 30px;
-}
-
-/* ============================================
-   GRÁFICO
-   ============================================ */
-#graficoPedidos {
-    max-height: 300px;
-    margin: 20px 0 30px;
-    background-color: var(--surface);
-    padding: 20px;
-    border-radius: 18px;
-    border: 1px solid var(--border);
-}
-
-/* ============================================
-   BACKUP
-   ============================================ */
-.backup-section {
-    background: linear-gradient(135deg, var(--surface) 0%, #f8f9fa 100%);
-    padding: 30px;
-    border-radius: 20px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-    text-align: center;
-}
-
-.backup-section h2 {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-}
-
-.backup-section p {
-    color: var(--text-light);
-    margin-bottom: 25px;
-    font-size: 1.1rem;
-}
-
-/* ============================================
-   BADGES PARA TIPOS DE SABOR
-   ============================================ */
+/* Badges para tipos */
 .tipo-badge {
     display: inline-block;
     padding: 4px 12px;
@@ -699,36 +513,209 @@ body {
 
 .tipo-badge.tipo-doce {
     background-color: #fef3e2;
-    color: #D35400;
-    border: 1px solid #E67E22;
+    color: var(--secondary-dark);
+    border: 1px solid var(--secondary);
 }
 
 .tipo-badge.tipo-salgada {
     background-color: #e8f0fe;
-    color: #2C3E50;
-    border: 1px solid #2C3E50;
+    color: var(--primary);
+    border: 1px solid var(--primary);
 }
 
 /* ============================================
-   ESTILO PARA PEDIDOS ATRASADOS
+   RELATÓRIOS
    ============================================ */
-.pedido-card.atrasado {
-    border-left: 6px solid #ff4444;
-    animation: pulse 1s infinite;
+.relatorio-acoes {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
 }
 
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+.btn-nova-noite,
+.btn-encerrar,
+.btn-atualizar,
+.btn-resetar {
+    flex: 1;
+    min-width: 150px;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-nova-noite {
+    background: linear-gradient(135deg, #27AE60, #229954);
+    color: white;
+}
+
+.btn-encerrar {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.btn-atualizar {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: white;
+}
+
+.btn-resetar {
+    background: linear-gradient(135deg, var(--danger), #a8231f);
+    color: white;
+}
+
+.btn-nova-noite:hover,
+.btn-encerrar:hover,
+.btn-atualizar:hover,
+.btn-resetar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Cards de totais */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+}
+
+.card-total {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.card-total h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    opacity: 0.9;
+}
+
+.card-total .valor {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+/* Ranking */
+.ranking-lista {
+    margin: 20px 0;
+}
+
+.ranking-item {
+    display: flex;
+    align-items: center;
+    padding: 14px 20px;
+    background-color: var(--background);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    border: 1px solid var(--border);
+}
+
+.ranking-posicao {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-right: 15px;
+}
+
+.ranking-nome {
+    flex: 1;
+    font-weight: 600;
+}
+
+.ranking-valor {
+    font-weight: 700;
+    color: var(--secondary);
 }
 
 /* ============================================
-   RESPONSIVIDADE
+   GRÁFICO
+   ============================================ */
+#graficoPedidos {
+    max-height: 250px;
+    margin: 20px 0;
+    background-color: var(--surface);
+    padding: 15px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+/* ============================================
+   BACKUP
+   ============================================ */
+.backup-section {
+    background-color: var(--background);
+    padding: 24px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+}
+
+.backup-section h2 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.backup-section p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+}
+
+.backup-section input[type="file"] {
+    margin: 20px auto;
+    display: block;
+}
+
+.btn-exportar,
+.btn-importar {
+    padding: 14px 30px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-exportar {
+    background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));
+    color: white;
+}
+
+.btn-importar {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.btn-exportar:hover,
+.btn-importar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ============================================
+   RESPONSIVIDADE - TABLET E CELULAR
    ============================================ */
 @media (max-width: 768px) {
     .app-header {
         padding: 12px 16px;
+        flex-direction: column;
+        text-align: center;
     }
     
     .logo-text h1 {
@@ -741,14 +728,14 @@ body {
     }
     
     .nav-abas {
-        top: 70px;
+        top: 104px;
         padding: 8px 12px;
     }
     
     .aba-btn {
         min-width: calc(50% - 4px);
-        padding: 14px 8px;
-        font-size: 1rem;
+        padding: 12px 8px;
+        font-size: 0.9rem;
     }
     
     .main-content {
@@ -757,68 +744,48 @@ body {
     
     .form-row {
         flex-direction: column;
-        gap: 12px;
     }
     
-    .form-col {
+    .form-group {
         min-width: 100%;
     }
     
-    .btn-principal {
-        min-width: 100%;
-        padding: 18px;
-        font-size: 1.2rem;
+    .btn-confirmar {
+        max-width: 100%;
     }
     
-    .pedido-timer {
-        font-size: 1.4rem;
-    }
-    
-    .ranking-posicao {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
-    }
-    
-    .ranking-nome {
-        font-size: 1rem;
-    }
-    
-    .ranking-valor {
-        font-size: 1rem;
-    }
-    
-    .relatorio-actions {
+    .relatorio-acoes {
         flex-direction: column;
     }
     
-    .btn-secundario {
+    .btn-nova-noite,
+    .btn-encerrar,
+    .btn-atualizar,
+    .btn-resetar {
         width: 100%;
+    }
+    
+    .pedido-timer {
+        font-size: 1.2rem;
     }
 }
 
 /* ============================================
-   UTILITÁRIOS
+   ALERTAS DE TEMPO
    ============================================ */
-.text-center {
-    text-align: center;
+.pedido-card[data-tempo="alerta"] {
+    border-left: 6px solid #ffaa00;
+    background-color: #fff3e0;
 }
 
-.mt-4 {
-    margin-top: 20px;
+.pedido-card[data-tempo="critico"] {
+    border-left: 6px solid #ff4444;
+    background-color: #ffeeee;
+    animation: pulse 1s infinite;
 }
 
-.mb-4 {
-    margin-bottom: 20px;
-}
-
-/* Animações */
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.pedido-card.novo {
-    animation: pulse 0.5s ease;
+    0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
    }
