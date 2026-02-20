@@ -1,6 +1,6 @@
 /* ============================================
-   SISTEMA DE PIZZARIA RODÍZIO - VERSÃO TABLET
-   Design Profissional com Header Fixo e Formulário Horizontal
+   SISTEMA DE PIZZARIA RODÍZIO - VERSÃO COMPLETA
+   Design Profissional com Header Fixo e Alertas de Tempo
    ============================================ */
 
 /* Importação de fontes */
@@ -21,6 +21,14 @@
     --text-light: #7F8C8D;      /* Cinza - texto secundário */
     --border: #BDC3C7;          /* Cinza - bordas */
     --shadow: rgba(0, 0, 0, 0.1); /* Sombra suave */
+    
+    /* Cores para alertas de tempo */
+    --alerta-normal: #27AE60;
+    --alerta-atencao: #F39C12;
+    --alerta-critico: #E74C3C;
+    --alerta-bg-normal: #E8F5E9;
+    --alerta-bg-atencao: #FFF3E0;
+    --alerta-bg-critico: #FFEBEE;
 }
 
 /* Reset e Estilos Globais */
@@ -382,6 +390,24 @@ body {
     opacity: 0.9;
 }
 
+/* Estilos para alertas de tempo */
+.pedido-card.alerta-atencao {
+    border-left: 6px solid var(--alerta-atencao);
+    background-color: var(--alerta-bg-atencao);
+}
+
+.pedido-card.alerta-critico {
+    border-left: 6px solid var(--alerta-critico);
+    background-color: var(--alerta-bg-critico);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
 .pedido-header {
     display: flex;
     justify-content: space-between;
@@ -415,12 +441,35 @@ body {
 .pedido-timer {
     font-size: 1.8rem;
     font-weight: 800;
-    color: var(--secondary);
     font-family: monospace;
     background-color: var(--background);
     padding: 8px 16px;
     border-radius: 40px;
     border: 2px solid var(--border);
+    transition: all 0.3s;
+}
+
+/* Cores do timer baseado no tempo */
+.pedido-timer.tempo-normal {
+    color: var(--alerta-normal);
+    border-color: var(--alerta-normal);
+}
+
+.pedido-timer.tempo-atencao {
+    color: var(--alerta-atencao);
+    border-color: var(--alerta-atencao);
+}
+
+.pedido-timer.tempo-critico {
+    color: var(--alerta-critico);
+    border-color: var(--alerta-critico);
+    animation: piscar 1s infinite;
+}
+
+@keyframes piscar {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
 .pedido-info {
@@ -435,6 +484,14 @@ body {
 .pedido-info strong {
     color: var(--primary);
     font-size: 1.2rem;
+}
+
+.alerta-mensagem {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-top: 8px;
+    font-weight: 600;
+    text-align: center;
 }
 
 .btn-liberar {
@@ -504,6 +561,9 @@ body {
     font-size: 1.1rem;
     font-weight: 500;
     color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .item-acoes {
@@ -540,13 +600,35 @@ body {
     background-color: #a8231f;
 }
 
+/* Badges para tipos de sabor */
+.tipo-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 10px;
+}
+
+.tipo-badge.tipo-doce {
+    background-color: #fef3e2;
+    color: #D35400;
+    border: 1px solid #E67E22;
+}
+
+.tipo-badge.tipo-salgada {
+    background-color: #e8f0fe;
+    color: #2C3E50;
+    border: 1px solid #2C3E50;
+}
+
 /* ============================================
    RELATÓRIOS E CARDS
    ============================================ */
 .relatorio-actions {
     display: flex;
     gap: 16px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
@@ -749,6 +831,14 @@ body {
     .ranking-valor {
         font-size: 1rem;
     }
+    
+    .relatorio-actions {
+        flex-direction: column;
+    }
+    
+    .btn-secundario {
+        width: 100%;
+    }
 }
 
 /* ============================================
@@ -766,47 +856,18 @@ body {
     margin-bottom: 20px;
 }
 
-/* Animações */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+/* Animações adicionais */
+@keyframes slideIn {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.pedido-card.novo {
-    animation: pulse 0.5s ease;
-}
-
-/* Badges para tipos de sabor */
-.tipo-badge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    margin-left: 10px;
-}
-
-.tipo-badge.tipo-doce {
-    background-color: #fef3e2;
-    color: #D35400;
-    border: 1px solid #E67E22;
-}
-
-.tipo-badge.tipo-salgada {
-    background-color: #e8f0fe;
-    color: #2C3E50;
-    border: 1px solid #2C3E50;
-}
-
-/* Estilo para pedidos atrasados */
-.pedido-card.atrasado {
-    border-left: 6px solid #ff4444;
-    animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(255, 68, 68, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(255, 68, 68, 0); }
+.novo-item {
+    animation: slideIn 0.3s ease;
 }
