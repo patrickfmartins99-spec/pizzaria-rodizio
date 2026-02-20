@@ -199,4 +199,169 @@
 
     <script src="script.js"></script>
 </body>
+</html>                    <h2>Novo Pedido</h2>
+                    <form id="formPedido" onsubmit="event.preventDefault(); criarPedido();">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <label>Tipo:</label>
+                                <select id="tipoSabor" onchange="carregarSaboresPorTipo()" required>
+                                    <option value="">Selecione</option>
+                                    <option value="doce">Doce</option>
+                                    <option value="salgada">Salgada</option>
+                                </select>
+                            </div>
+
+                            <div class="form-col">
+                                <label>Sabor:</label>
+                                <select id="saborPedido" required>
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+
+                            <div class="form-col">
+                                <label>Garçom:</label>
+                                <select id="garcomPedido" required>
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+
+                            <div class="form-col">
+                                <label>Mesa:</label>
+                                <input type="number" id="mesaPedido" min="1" value="1" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-principal">✓ Confirmar Pedido</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="fila-pedidos">
+                    <h2>Fila de Pedidos</h2>
+                    
+                    <div class="filtros">
+                        <button class="filtro-btn ativo" onclick="filtrarPedidos('todos')">📋 TODOS</button>
+                        <button class="filtro-btn" onclick="filtrarPedidos('pendentes')">⏳ PENDENTES</button>
+                        <button class="filtro-btn" onclick="filtrarPedidos('concluidos')">✅ CONCLUÍDOS</button>
+                    </div>
+
+                    <div id="listaPedidos" class="lista-pedidos">
+                        <!-- Pedidos serão inseridos aqui dinamicamente -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA CONFIGURAÇÕES -->
+            <div id="abaConfiguracoes" class="aba-conteudo">
+                <div class="config-section">
+                    <h2>🍕 Sabores</h2>
+                    
+                    <form id="formSabor" onsubmit="event.preventDefault(); adicionarSabor();">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <input type="text" id="nomeSabor" placeholder="Nome do sabor" required>
+                            </div>
+                            <div class="form-col">
+                                <select id="tipoSaborConfig" required>
+                                    <option value="doce">Doce</option>
+                                    <option value="salgada">Salgada</option>
+                                </select>
+                            </div>
+                            <div class="form-col">
+                                <button type="submit" class="btn-principal">Adicionar Sabor</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="listaSabores" class="lista-itens">
+                        <!-- Sabores serão inseridos aqui -->
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h2>👨‍🍳 Garçons</h2>
+                    
+                    <form id="formGarcom" onsubmit="event.preventDefault(); adicionarGarcom();">
+                        <div class="form-row">
+                            <div class="form-col">
+                                <input type="text" id="nomeGarcom" placeholder="Nome do garçom" required>
+                            </div>
+                            <div class="form-col">
+                                <button type="submit" class="btn-principal">Adicionar Garçom</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div id="listaGarcons" class="lista-itens">
+                        <!-- Garçons serão inseridos aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- ABA RELATÓRIOS -->
+            <div id="abaRelatorios" class="aba-conteudo">
+                <div class="relatorio-actions">
+                    <button class="btn-principal" onclick="novaNoite()" style="background: linear-gradient(135deg, #27AE60, #229954);">
+                        🆕 NOVA NOITE
+                    </button>
+                    <button class="btn-secundario" onclick="encerrarNoite()">🔚 Encerrar Noite</button>
+                    <button class="btn-secundario" onclick="carregarRelatorioNoite()">🔄 Atualizar</button>
+                </div>
+                
+                <!-- Botão de reset com estilo diferente -->
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <button class="btn-excluir" onclick="resetarSistema()" style="width: auto; padding: 10px 20px;">
+                        ⚠️ RESETAR SISTEMA
+                    </button>
+                </div>
+
+                <div class="relatorio-section">
+                    <h2>Totais da Noite</h2>
+                    <div id="totaisNoite" class="cards-container">
+                        <!-- Cards com totais -->
+                    </div>
+                </div>
+
+                <div class="relatorio-section">
+                    <h2>⏱️ Tempo Médio: <span id="tempoMedio">0</span> min</h2>
+                    <canvas id="graficoPedidos"></canvas>
+                </div>
+
+                <div class="relatorio-section">
+                    <h2>🏆 Top 5 Sabores</h2>
+                    <div id="topSabores" class="ranking-lista"></div>
+                </div>
+
+                <div class="relatorio-section">
+                    <h2>📊 Ranking de Garçons</h2>
+                    <div id="rankingGarcons" class="ranking-lista"></div>
+                </div>
+
+                <div class="relatorio-section">
+                    <h2>📈 Estatísticas Gerais</h2>
+                    <div id="estatisticasGerais" class="cards-container"></div>
+                </div>
+            </div>
+
+            <!-- ABA BACKUP -->
+            <div id="abaBackup" class="aba-conteudo">
+                <div class="backup-section">
+                    <h2>📤 Exportar Dados</h2>
+                    <p>Faça o download de todos os dados do sistema</p>
+                    <button class="btn-principal" onclick="exportarDados()">Download JSON</button>
+                </div>
+
+                <div class="backup-section">
+                    <h2>📥 Importar Dados</h2>
+                    <p>Restaurar dados de um arquivo JSON</p>
+                    <input type="file" id="importarArquivo" accept=".json" style="margin: 20px auto; display: block;">
+                    <button class="btn-principal" onclick="importarDados()">Importar</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
