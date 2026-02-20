@@ -3,91 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-    <title>Pizzaria Rodízio - Sistema Profissional</title>
+    <title>Pizzaria Rodízio - Sistema de Controle</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="container">
-        <!-- HEADER FIXO -->
-        <header class="app-header">
-            <div class="logo-area">
-                <span class="logo-icon">🍕</span>
-                <div class="logo-text">
-                    <h1>PIZZARIA RODÍZIO</h1>
-                    <p>Sistema de Controle</p>
-                </div>
+        <!-- HEADER -->
+        <header class="header">
+            <div class="logo">
+                <h1>PIZZARIA RODÍZIO</h1>
+                <p>Sistema de Controle de Pedidos</p>
             </div>
             <div class="data-header" id="dataAtual"></div>
         </header>
 
-        <!-- NAVEGAÇÃO FIXA -->
-        <nav class="nav-abas">
-            <button class="aba-btn ativa" onclick="mostrarAba('pedidos')">📋 PEDIDOS</button>
-            <button class="aba-btn" onclick="mostrarAba('configuracoes')">⚙️ CONFIG.</button>
-            <button class="aba-btn" onclick="mostrarAba('relatorios')">📊 RELATÓRIOS</button>
-            <button class="aba-btn" onclick="mostrarAba('backup')">💾 BACKUP</button>
-        </nav>
+        <!-- ABAS DE NAVEGAÇÃO -->
+        <div class="nav-abas">
+            <button class="aba-btn ativa" onclick="mostrarAba('pedidos')">PEDIDOS</button>
+            <button class="aba-btn" onclick="mostrarAba('configuracoes')">CONFIGURAÇÕES</button>
+            <button class="aba-btn" onclick="mostrarAba('relatorios')">RELATÓRIOS</button>
+            <button class="aba-btn" onclick="mostrarAba('backup')">BACKUP</button>
+        </div>
 
         <!-- CONTEÚDO PRINCIPAL -->
-        <main class="main-content">
+        <div class="conteudo">
             <!-- ABA PEDIDOS -->
             <div id="abaPedidos" class="aba-conteudo ativa">
-                <div class="painel-pedido">
+                <!-- NOVO PEDIDO -->
+                <div class="card">
                     <h2>NOVO PEDIDO</h2>
                     <form id="formPedido" onsubmit="event.preventDefault(); criarPedido();">
                         <div class="form-row">
                             <div class="form-group">
                                 <label>TIPO</label>
                                 <select id="tipoSabor" onchange="carregarSaboresPorTipo()" required>
-                                    <option value="">Selecione</option>
+                                    <option value="">SELECIONE</option>
                                     <option value="doce">DOCE</option>
                                     <option value="salgada">SALGADA</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <label>SABOR</label>
                                 <select id="saborPedido" required>
-                                    <option value="">Selecione</option>
+                                    <option value="">SELECIONE</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <label>GARÇOM</label>
                                 <select id="garcomPedido" required>
-                                    <option value="">Selecione</option>
+                                    <option value="">SELECIONE</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
                                 <label>MESA</label>
                                 <input type="number" id="mesaPedido" min="1" value="1" required>
                             </div>
                         </div>
-                        
-                        <button type="submit" class="btn-confirmar">✓ CONFIRMAR PEDIDO</button>
+                        <button type="submit" class="btn-confirmar">CONFIRMAR PEDIDO</button>
                     </form>
                 </div>
 
-                <div class="fila-pedidos">
+                <!-- FILA DE PEDIDOS -->
+                <div class="card">
                     <h2>FILA DE PEDIDOS</h2>
-                    
                     <div class="filtros">
-                        <button class="filtro-btn ativo" onclick="filtrarPedidos('todos')">📋 TODOS</button>
-                        <button class="filtro-btn" onclick="filtrarPedidos('pendentes')">⏳ PENDENTES</button>
-                        <button class="filtro-btn" onclick="filtrarPedidos('concluidos')">✅ CONCLUÍDOS</button>
+                        <button class="filtro-btn ativo" onclick="filtrarPedidos('todos')">TODOS</button>
+                        <button class="filtro-btn" onclick="filtrarPedidos('pendentes')">PENDENTES</button>
+                        <button class="filtro-btn" onclick="filtrarPedidos('concluidos')">CONCLUÍDOS</button>
                     </div>
-
                     <div id="listaPedidos" class="lista-pedidos"></div>
                 </div>
             </div>
 
             <!-- ABA CONFIGURAÇÕES -->
             <div id="abaConfiguracoes" class="aba-conteudo">
-                <div class="config-section">
-                    <h2>🍕 SABORES</h2>
-                    
+                <!-- SABORES -->
+                <div class="card">
+                    <h2>SABORES</h2>
                     <form id="formSabor" onsubmit="event.preventDefault(); adicionarSabor();">
                         <div class="form-row">
                             <div class="form-group">
@@ -102,13 +95,12 @@
                             <button type="submit" class="btn-adicionar">ADICIONAR</button>
                         </div>
                     </form>
-
                     <div id="listaSabores" class="lista-itens"></div>
                 </div>
 
-                <div class="config-section">
-                    <h2>👨‍🍳 GARÇONS</h2>
-                    
+                <!-- GARÇONS -->
+                <div class="card">
+                    <h2>GARÇONS</h2>
                     <form id="formGarcom" onsubmit="event.preventDefault(); adicionarGarcom();">
                         <div class="form-row">
                             <div class="form-group">
@@ -117,62 +109,61 @@
                             <button type="submit" class="btn-adicionar">ADICIONAR</button>
                         </div>
                     </form>
-
                     <div id="listaGarcons" class="lista-itens"></div>
                 </div>
             </div>
 
             <!-- ABA RELATÓRIOS -->
             <div id="abaRelatorios" class="aba-conteudo">
-                <div class="relatorio-acoes">
-                    <button class="btn-nova-noite" onclick="novaNoite()">🆕 NOVA NOITE</button>
-                    <button class="btn-encerrar" onclick="encerrarNoite()">🔚 ENCERRAR NOITE</button>
-                    <button class="btn-atualizar" onclick="carregarRelatorioNoite()">🔄 ATUALIZAR</button>
-                    <button class="btn-resetar" onclick="resetarSistema()">⚠️ RESETAR SISTEMA</button>
+                <div class="acoes-relatorios">
+                    <button class="btn-nova-noite" onclick="novaNoite()">NOVA NOITE</button>
+                    <button class="btn-encerrar" onclick="encerrarNoite()">ENCERRAR NOITE</button>
+                    <button class="btn-atualizar" onclick="carregarRelatorioNoite()">ATUALIZAR</button>
+                    <button class="btn-resetar" onclick="resetarSistema()">RESETAR SISTEMA</button>
                 </div>
 
-                <div class="relatorio-section">
+                <div class="card">
                     <h2>TOTAIS DA NOITE</h2>
                     <div id="totaisNoite" class="cards-container"></div>
                 </div>
 
-                <div class="relatorio-section">
-                    <h2>⏱️ TEMPO MÉDIO: <span id="tempoMedio">0</span> MIN</h2>
+                <div class="card">
+                    <h2>TEMPO MÉDIO: <span id="tempoMedio">0</span> MIN</h2>
                     <canvas id="graficoPedidos"></canvas>
                 </div>
 
-                <div class="relatorio-section">
-                    <h2>🏆 TOP 5 SABORES</h2>
-                    <div id="topSabores" class="ranking-lista"></div>
+                <div class="card">
+                    <h2>TOP 5 SABORES</h2>
+                    <div id="topSabores" class="lista-ranking"></div>
                 </div>
 
-                <div class="relatorio-section">
-                    <h2>📊 RANKING DE GARÇONS</h2>
-                    <div id="rankingGarcons" class="ranking-lista"></div>
+                <div class="card">
+                    <h2>RANKING DE GARÇONS</h2>
+                    <div id="rankingGarcons" class="lista-ranking"></div>
                 </div>
 
-                <div class="relatorio-section">
-                    <h2>📈 ESTATÍSTICAS GERAIS</h2>
+                <div class="card">
+                    <h2>ESTATÍSTICAS GERAIS</h2>
                     <div id="estatisticasGerais" class="cards-container"></div>
                 </div>
             </div>
 
             <!-- ABA BACKUP -->
             <div id="abaBackup" class="aba-conteudo">
-                <div class="backup-section">
-                    <h2>📤 EXPORTAR DADOS</h2>
+                <div class="card">
+                    <h2>EXPORTAR DADOS</h2>
                     <p>Faça o download de todos os dados do sistema</p>
                     <button class="btn-exportar" onclick="exportarDados()">DOWNLOAD JSON</button>
                 </div>
 
-                <div class="backup-section">
-                    <h2>📥 IMPORTAR DADOS</h2>
+                <div class="card">
+                    <h2>IMPORTAR DADOS</h2>
                     <p>Restaurar dados de um arquivo JSON</p>
                     <input type="file" id="importarArquivo" accept=".json">
                     <button class="btn-importar" onclick="importarDados()">IMPORTAR</button>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 
     <script src="script.js"></script>
