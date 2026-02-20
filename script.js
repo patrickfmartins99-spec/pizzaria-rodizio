@@ -33,13 +33,16 @@ function inicializarSistema() {
         localStorage.setItem('sistemaRodizio', JSON.stringify(dadosIniciais));
     }
     
-    document.getElementById('dataAtual').textContent = new Date().toLocaleDateString('pt-BR', {
+    // Atualizar data no header
+    const dataAtual = new Date().toLocaleDateString('pt-BR', {
         weekday: 'long',
         year: 'numeric',
         month: 'long',
         day: 'numeric'
     });
+    document.getElementById('dataAtual').textContent = dataAtual;
     
+    // Carregar dados iniciais
     carregarSabores();
     carregarGarcons();
     carregarSaboresPorTipo();
@@ -51,24 +54,24 @@ function inicializarSistema() {
 // ============================================
 
 function novaNoite() {
-    if (!confirm('🆕 Iniciar nova noite?\n\nOs pedidos atuais serão movidos para o histórico.\nCadastros de sabores e garçons serão mantidos.')) {
+    if (!confirm('🆕 INICIAR NOVA NOITE?\n\nOs pedidos atuais serão movidos para o histórico.\nCadastros de sabores e garçons serão mantidos.')) {
         return;
     }
     
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     
-    // Finaliza a noite atual se houver pedidos
+    // Finalizar noite atual se houver pedidos
     if (sistema.noiteAtual.pedidos.length > 0) {
         sistema.noiteAtual.horaFim = new Date().toLocaleTimeString('pt-BR', { 
             hour: '2-digit', 
             minute: '2-digit' 
         });
         
-        // Adiciona ao histórico
+        // Adicionar ao histórico
         sistema.historicoNoites.push({ ...sistema.noiteAtual });
     }
     
-    // Cria nova noite (mantém configurações)
+    // Criar nova noite
     sistema.noiteAtual = {
         data: new Date().toISOString().split('T')[0],
         horaInicio: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
@@ -80,7 +83,7 @@ function novaNoite() {
     
     alert('✅ Nova noite iniciada! Cadastros mantidos.');
     
-    // Atualiza interfaces
+    // Atualizar interfaces
     atualizarFilaPedidos();
     if (document.getElementById('abaRelatorios').classList.contains('ativa')) {
         carregarRelatorioNoite();
@@ -92,7 +95,6 @@ function resetarSistema() {
         return;
     }
     
-    // Segunda confirmação para segurança
     const confirmacao = prompt('Digite "RESETAR" para confirmar a exclusão total de todos os dados:');
     if (confirmacao !== 'RESETAR') {
         alert('Operação cancelada.');
@@ -117,20 +119,19 @@ function resetarSistema() {
     
     alert('🔄 Sistema resetado! Todos os dados foram apagados.');
     
-    // Recarrega tudo
+    // Recarregar tudo
     carregarSabores();
     carregarGarcons();
     carregarSaboresPorTipo();
     atualizarFilaPedidos();
     
-    // Se estiver na aba de relatórios, atualiza
     if (document.getElementById('abaRelatorios').classList.contains('ativa')) {
         carregarRelatorioNoite();
     }
 }
 
 // ============================================
-// FUNÇÕES DE CONFIGURAÇÕES - SABORES (COM ORDEM ALFABÉTICA)
+// FUNÇÕES DE CONFIGURAÇÕES - SABORES
 // ============================================
 
 function adicionarSabor() {
@@ -152,7 +153,7 @@ function adicionarSabor() {
     
     sistema.configuracoes.sabores.push(novoSabor);
     
-    // Ordena sabores alfabeticamente
+    // Ordenar alfabeticamente
     sistema.configuracoes.sabores.sort((a, b) => a.nome.localeCompare(b.nome));
     
     localStorage.setItem('sistemaRodizio', JSON.stringify(sistema));
@@ -167,7 +168,6 @@ function carregarSabores() {
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     const listaSabores = document.getElementById('listaSabores');
     
-    // Garante ordem alfabética
     const saboresOrdenados = [...sistema.configuracoes.sabores].sort((a, b) => a.nome.localeCompare(b.nome));
     
     listaSabores.innerHTML = '';
@@ -177,11 +177,12 @@ function carregarSabores() {
         item.className = 'item-lista';
         item.innerHTML = `
             <div class="item-info">
-                <strong>${sabor.nome}</strong> <span class="tipo-badge tipo-${sabor.tipo}">${sabor.tipo}</span>
+                <strong>${sabor.nome}</strong>
+                <span class="tipo-badge tipo-${sabor.tipo}">${sabor.tipo}</span>
             </div>
             <div class="item-acoes">
-                <button class="btn-editar" onclick="editarSabor(${sabor.id})">Editar</button>
-                <button class="btn-excluir" onclick="excluirSabor(${sabor.id})">Excluir</button>
+                <button class="btn-editar" onclick="editarSabor(${sabor.id})">EDITAR</button>
+                <button class="btn-excluir" onclick="excluirSabor(${sabor.id})">EXCLUIR</button>
             </div>
         `;
         listaSabores.appendChild(item);
@@ -196,7 +197,6 @@ function editarSabor(id) {
     if (novoNome && novoNome.trim()) {
         sabor.nome = novoNome.trim();
         
-        // Reordena após edição
         sistema.configuracoes.sabores.sort((a, b) => a.nome.localeCompare(b.nome));
         
         localStorage.setItem('sistemaRodizio', JSON.stringify(sistema));
@@ -217,7 +217,7 @@ function excluirSabor(id) {
 }
 
 // ============================================
-// FUNÇÕES DE CONFIGURAÇÕES - GARÇONS (COM ORDEM ALFABÉTICA)
+// FUNÇÕES DE CONFIGURAÇÕES - GARÇONS
 // ============================================
 
 function adicionarGarcom() {
@@ -237,7 +237,7 @@ function adicionarGarcom() {
     
     sistema.configuracoes.garcons.push(novoGarcom);
     
-    // Ordena garçons alfabeticamente
+    // Ordenar alfabeticamente
     sistema.configuracoes.garcons.sort((a, b) => a.nome.localeCompare(b.nome));
     
     localStorage.setItem('sistemaRodizio', JSON.stringify(sistema));
@@ -251,7 +251,6 @@ function carregarGarcons() {
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     const listaGarcons = document.getElementById('listaGarcons');
     
-    // Garante ordem alfabética
     const garconsOrdenados = [...sistema.configuracoes.garcons].sort((a, b) => a.nome.localeCompare(b.nome));
     
     listaGarcons.innerHTML = '';
@@ -264,8 +263,8 @@ function carregarGarcons() {
                 <strong>${garcom.nome}</strong>
             </div>
             <div class="item-acoes">
-                <button class="btn-editar" onclick="editarGarcom(${garcom.id})">Editar</button>
-                <button class="btn-excluir" onclick="excluirGarcom(${garcom.id})">Excluir</button>
+                <button class="btn-editar" onclick="editarGarcom(${garcom.id})">EDITAR</button>
+                <button class="btn-excluir" onclick="excluirGarcom(${garcom.id})">EXCLUIR</button>
             </div>
         `;
         listaGarcons.appendChild(item);
@@ -278,10 +277,9 @@ function carregarSelectGarcons() {
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     const select = document.getElementById('garcomPedido');
     
-    // Garçons ordenados para o select
     const garconsOrdenados = [...sistema.configuracoes.garcons].sort((a, b) => a.nome.localeCompare(b.nome));
     
-    select.innerHTML = '<option value="">Selecione</option>';
+    select.innerHTML = '<option value="">SELECIONE</option>';
     
     garconsOrdenados.forEach(garcom => {
         const option = document.createElement('option');
@@ -299,7 +297,6 @@ function editarGarcom(id) {
     if (novoNome && novoNome.trim()) {
         garcom.nome = novoNome.trim();
         
-        // Reordena após edição
         sistema.configuracoes.garcons.sort((a, b) => a.nome.localeCompare(b.nome));
         
         localStorage.setItem('sistemaRodizio', JSON.stringify(sistema));
@@ -317,7 +314,7 @@ function excluirGarcom(id) {
 }
 
 // ============================================
-// FUNÇÕES DE PEDIDOS (COM SABORES ORDENADOS)
+// FUNÇÕES DE PEDIDOS
 // ============================================
 
 function carregarSaboresPorTipo() {
@@ -325,10 +322,9 @@ function carregarSaboresPorTipo() {
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     const selectSabores = document.getElementById('saborPedido');
     
-    selectSabores.innerHTML = '<option value="">Selecione um sabor</option>';
+    selectSabores.innerHTML = '<option value="">SELECIONE</option>';
     
     if (tipo) {
-        // Filtra e ordena alfabeticamente
         const saboresFiltrados = sistema.configuracoes.sabores
             .filter(s => s.tipo === tipo)
             .sort((a, b) => a.nome.localeCompare(b.nome));
@@ -356,12 +352,14 @@ function criarPedido() {
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     
     const sabor = sistema.configuracoes.sabores.find(s => s.id == saborId);
+    const garcom = sistema.configuracoes.garcons.find(g => g.id == garcomId);
     
     const novoPedido = {
         id: Date.now(),
         tipo: tipo,
         sabor: sabor.nome,
         saborId: parseInt(saborId),
+        garcom: garcom.nome,
         garcomId: parseInt(garcomId),
         mesa: parseInt(mesa),
         dataHora: new Date().toISOString(),
@@ -372,8 +370,9 @@ function criarPedido() {
     sistema.noiteAtual.pedidos.push(novoPedido);
     localStorage.setItem('sistemaRodizio', JSON.stringify(sistema));
     
+    // Limpar formulário
     document.getElementById('tipoSabor').value = '';
-    document.getElementById('saborPedido').innerHTML = '<option value="">Selecione um sabor</option>';
+    document.getElementById('saborPedido').innerHTML = '<option value="">SELECIONE</option>';
     
     atualizarFilaPedidos();
 }
@@ -419,32 +418,32 @@ function getAlertaTempo(minutos) {
     if (minutos >= 10) {
         return {
             cor: '#ff4444',
-            bg: '#ffeeee',
             emoji: '🔥',
-            texto: 'CRÍTICO'
+            texto: 'CRÍTICO',
+            classe: 'critico'
         };
     } else if (minutos >= 5) {
         return {
             cor: '#ffaa00',
-            bg: '#fff3e0',
             emoji: '⚠️',
-            texto: 'ATENÇÃO'
+            texto: 'ATENÇÃO',
+            classe: 'alerta'
         };
     } else {
         return {
             cor: '#27ae60',
-            bg: '#e8f5e9',
             emoji: '✅',
-            texto: 'Normal'
+            texto: 'NORMAL',
+            classe: 'normal'
         };
     }
 }
 
 // ============================================
-// FILA DE PEDIDOS (COM FILTROS REORGANIZADOS)
+// FILA DE PEDIDOS
 // ============================================
 
-let filtroAtual = 'todos'; // Agora padrão é 'todos'
+let filtroAtual = 'todos';
 
 function filtrarPedidos(filtro) {
     filtroAtual = filtro;
@@ -468,27 +467,20 @@ function atualizarFilaPedidos() {
     } else if (filtroAtual === 'concluidos') {
         pedidosFiltrados = pedidosFiltrados.filter(p => p.status === 'concluido');
     }
-    // 'todos' não filtra
     
-    // Ordena por data (mais recentes primeiro)
     pedidosFiltrados.sort((a, b) => new Date(b.dataHora) - new Date(a.dataHora));
     
     listaPedidos.innerHTML = '';
     
     pedidosFiltrados.forEach(pedido => {
-        const garcom = sistema.configuracoes.garcons.find(g => g.id === pedido.garcomId);
-        const nomeGarcom = garcom ? garcom.nome : 'Não identificado';
-        
         const tempo = formatarTempo(pedido.dataHora);
         const alerta = getAlertaTempo(tempo.minutos);
         
         const card = document.createElement('div');
         card.className = `pedido-card ${pedido.status === 'concluido' ? 'concluido' : ''}`;
         
-        // Estilo especial para pedidos atrasados
         if (pedido.status === 'pendente' && tempo.minutos >= 5) {
-            card.style.borderLeft = `6px solid ${alerta.cor}`;
-            card.style.backgroundColor = alerta.bg;
+            card.setAttribute('data-tempo', alerta.classe);
         }
         
         const tempoDecorrido = pedido.status === 'pendente' ? 
@@ -498,24 +490,22 @@ function atualizarFilaPedidos() {
         card.innerHTML = `
             <div class="pedido-header">
                 <span class="pedido-tipo tipo-${pedido.tipo}">${pedido.tipo}</span>
-                <span class="pedido-timer" style="color: ${alerta.cor}; font-weight: bold;" data-id="${pedido.id}">
+                <span class="pedido-timer" style="color: ${alerta.cor};" data-id="${pedido.id}">
                     ${tempoDecorrido}
                 </span>
             </div>
             <div class="pedido-info">
                 <p><strong>${pedido.sabor}</strong></p>
-                <p>Garçom: ${nomeGarcom} | Mesa: ${pedido.mesa}</p>
+                <p>Garçom: ${pedido.garcom} | Mesa: ${pedido.mesa}</p>
                 ${pedido.status === 'pendente' && tempo.minutos >= 5 ? 
                     `<p style="color: ${alerta.cor}; font-weight: bold; margin-top: 8px;">
                         ${alerta.emoji} ${alerta.texto} - ${tempo.minutos} minutos
                     </p>` : ''}
             </div>
             ${pedido.status === 'pendente' ? `
-                <div class="pedido-actions">
-                    <button class="btn-liberar" onclick="liberarPedido(${pedido.id})">
-                        ✓ Pedido Liberado
-                    </button>
-                </div>
+                <button class="btn-liberar" onclick="liberarPedido(${pedido.id})">
+                    ✓ PEDIDO LIBERADO
+                </button>
             ` : ''}
         `;
         
@@ -532,7 +522,7 @@ function configurarAtualizacaoTimer() {
 }
 
 // ============================================
-// RELATÓRIOS E ESTATÍSTICAS
+// RELATÓRIOS
 // ============================================
 
 function encerrarNoite() {
@@ -542,16 +532,13 @@ function encerrarNoite() {
     
     const sistema = JSON.parse(localStorage.getItem('sistemaRodizio'));
     
-    // Finaliza a noite atual
     sistema.noiteAtual.horaFim = new Date().toLocaleTimeString('pt-BR', { 
         hour: '2-digit', 
         minute: '2-digit' 
     });
     
-    // Adiciona ao histórico
     sistema.historicoNoites.push({ ...sistema.noiteAtual });
     
-    // Cria nova noite
     sistema.noiteAtual = {
         data: new Date().toISOString().split('T')[0],
         horaInicio: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
@@ -578,15 +565,15 @@ function carregarRelatorioNoite() {
     
     document.getElementById('totaisNoite').innerHTML = `
         <div class="card-total">
-            <h3>Total Pedidos</h3>
+            <h3>TOTAL PEDIDOS</h3>
             <div class="valor">${totalPedidos}</div>
         </div>
         <div class="card-total">
-            <h3>Concluídos</h3>
+            <h3>CONCLUÍDOS</h3>
             <div class="valor">${concluidos}</div>
         </div>
         <div class="card-total">
-            <h3>Pendentes</h3>
+            <h3>PENDENTES</h3>
             <div class="valor">${pendentes}</div>
         </div>
     `;
@@ -600,7 +587,7 @@ function carregarRelatorioNoite() {
     // Gráfico
     criarGraficoPedidos(pedidos);
     
-    // Top 5 sabores (ordenados por quantidade)
+    // Top 5 sabores
     const contagemSabores = {};
     pedidos.forEach(p => {
         contagemSabores[p.sabor] = (contagemSabores[p.sabor] || 0) + 1;
@@ -621,9 +608,7 @@ function carregarRelatorioNoite() {
     // Ranking de garçons
     const contagemGarcons = {};
     pedidos.forEach(p => {
-        const garcom = sistema.configuracoes.garcons.find(g => g.id === p.garcomId);
-        const nomeGarcom = garcom ? garcom.nome : 'Não identificado';
-        contagemGarcons[nomeGarcom] = (contagemGarcons[nomeGarcom] || 0) + 1;
+        contagemGarcons[p.garcom] = (contagemGarcons[p.garcom] || 0) + 1;
     });
     
     const rankingGarcons = Object.entries(contagemGarcons)
@@ -656,15 +641,15 @@ function carregarRelatorioNoite() {
     
     document.getElementById('estatisticasGerais').innerHTML = `
         <div class="card-total">
-            <h3>Total Geral</h3>
+            <h3>TOTAL GERAL</h3>
             <div class="valor">${totalGeralPedidos}</div>
         </div>
         <div class="card-total">
-            <h3>Tempo Médio Geral</h3>
+            <h3>TEMPO MÉDIO GERAL</h3>
             <div class="valor">${tempoMedioGeral} min</div>
         </div>
         <div class="card-total">
-            <h3>Noites Registradas</h3>
+            <h3>NOITES REGISTRADAS</h3>
             <div class="valor">${historico.length + 1}</div>
         </div>
     `;
@@ -673,7 +658,6 @@ function carregarRelatorioNoite() {
 function criarGraficoPedidos(pedidos) {
     const ctx = document.getElementById('graficoPedidos').getContext('2d');
     
-    // Agrupa pedidos por hora
     const pedidosPorHora = {};
     pedidos.forEach(p => {
         const hora = new Date(p.dataHora).getHours() + 'h';
@@ -683,7 +667,7 @@ function criarGraficoPedidos(pedidos) {
     const labels = Object.keys(pedidosPorHora).sort();
     const dados = labels.map(label => pedidosPorHora[label]);
     
-    // Destrói gráfico anterior se existir
+    // Destruir gráfico anterior
     Chart.getChart('graficoPedidos')?.destroy();
     
     new Chart(ctx, {
@@ -718,7 +702,7 @@ function criarGraficoPedidos(pedidos) {
 }
 
 // ============================================
-// BACKUP (IMPORTAR/EXPORTAR)
+// BACKUP
 // ============================================
 
 function exportarDados() {
@@ -749,15 +733,12 @@ function importarDados() {
         try {
             const dados = JSON.parse(e.target.result);
             
-            // Validação básica da estrutura
             if (!dados.configuracoes || !dados.noiteAtual || !dados.historicoNoites) {
                 throw new Error('Arquivo inválido');
             }
             
             localStorage.setItem('sistemaRodizio', JSON.stringify(dados));
             alert('Dados importados com sucesso!');
-            
-            // Recarrega a página para atualizar tudo
             window.location.reload();
         } catch (error) {
             alert('Erro ao importar arquivo: ' + error.message);
@@ -772,22 +753,18 @@ function importarDados() {
 // ============================================
 
 function mostrarAba(nomeAba) {
-    // Remove classe ativa de todas as abas
     document.querySelectorAll('.aba-btn').forEach(btn => {
         btn.classList.remove('ativa');
     });
     
-    // Esconde todos os conteúdos
     document.querySelectorAll('.aba-conteudo').forEach(aba => {
         aba.classList.remove('ativa');
     });
     
-    // Ativa a aba clicada
     event.target.classList.add('ativa');
     document.getElementById(`aba${nomeAba.charAt(0).toUpperCase() + nomeAba.slice(1)}`).classList.add('ativa');
     
-    // Carrega dados específicos da aba
     if (nomeAba === 'relatorios') {
         carregarRelatorioNoite();
     }
-                }
+                               }
